@@ -1,23 +1,13 @@
 import dlt
-from pyspark.sql.functions import *
 
-@dlt.view(
-  name="sales_enr_view"
-)
-
-def sales_enr_view():
-  df = spark.readStream.table("sales_stg")
-  df = df.withColumn("total_amount",col("quantity") * col("amount"))
-  return df
-
-
-# Creating a destination silver table
 dlt.create_streaming_table(
-    name="sales_enr"
+    name="fact_sales"
 )
+
+# AUTO CDC flow
 
 dlt.create_auto_cdc_flow(
-  target = "sales_enr",
+  target = "fact_sales",
   source = "sales_enr_view",
   keys = ["sales_id"],
   sequence_by = "sale_timestamp",
@@ -30,3 +20,5 @@ dlt.create_auto_cdc_flow(
   track_history_column_list = None,
   track_history_except_column_list = None
 )
+
+
