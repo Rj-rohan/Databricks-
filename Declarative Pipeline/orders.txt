@@ -1,0 +1,24 @@
+CREATE TABLE orders
+(
+    order_id INT,
+    order_date DATE,
+    customer_id INT,
+    order_status STRING
+);
+
+INSERT INTO orders
+VALUES
+    (1,'2023-01-01', 101, 'COMPLETED'),
+    (2,'2023-01-02', 102, 'PENDING'),
+    (3,'2023-01-03',103, 'COMPLETED'),
+    (4,'2023-01-04',104,'PENDING'),
+    (5,'2023-01-05',105,'COMPLETED');
+
+-- inserting more data
+INSERT INTO orders
+VALUES
+    (6,'2023-01-06', 106, 'COMPLETED'),
+    (7,'2023-01-07', 107, 'PENDING'),
+    (8,'2023-01-08',108, 'COMPLETED');
+
+SELECT * FROM orders;
